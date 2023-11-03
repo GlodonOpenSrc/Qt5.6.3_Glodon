@@ -623,7 +623,7 @@ void QMetaObjectPublisher::handleMessage(const QJsonObject &message, QWebChannel
     }
 
     if (!message.contains(KEY_TYPE)) {
-        qWarning("JSON message object is missing the type property: %s", QJsonDocument(message).toJson().constData());
+        qWarning("JSON message object is missing the type property");
         return;
     }
 
@@ -632,8 +632,7 @@ void QMetaObjectPublisher::handleMessage(const QJsonObject &message, QWebChannel
         setClientIsIdle(true);
     } else if (type == TypeInit) {
         if (!message.contains(KEY_ID)) {
-            qWarning("JSON message object is missing the id property: %s",
-                      QJsonDocument(message).toJson().constData());
+            qWarning("JSON message object is missing the id property");
             return;
         }
         transport->sendMessage(createResponse(message.value(KEY_ID), initializeClient(transport)));
@@ -653,8 +652,7 @@ void QMetaObjectPublisher::handleMessage(const QJsonObject &message, QWebChannel
 
         if (type == TypeInvokeMethod) {
             if (!message.contains(KEY_ID)) {
-                qWarning("JSON message object is missing the id property: %s",
-                          QJsonDocument(message).toJson().constData());
+                qWarning("JSON message object is missing the id property");
                 return;
             }
 
